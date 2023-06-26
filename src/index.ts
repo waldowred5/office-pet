@@ -6,9 +6,9 @@ const LaunchRequestHandler = {
   },
   handle(handlerInput) {
     return handlerInput.responseBuilder
-      .speak('Bob is alive!')
-      .reprompt('Bob is alive!')
-      .withSimpleCard("I'm a card title", 'Bob is alive!')
+      .speak('Bob is happy!')
+      .reprompt('Bob is happy!')
+      .withSimpleCard("I'm a card title", 'Bob is happy!')
       .getResponse();
   }
 };
@@ -91,7 +91,6 @@ const ErrorHandler = {
 let skill;
 
 export async function handler(event, context) {
-  console.log(`REQUEST++++${JSON.stringify(event)}`);
   if (!skill) {
     skill = SkillBuilders.custom()
       .addRequestHandlers(
@@ -106,7 +105,6 @@ export async function handler(event, context) {
   }
 
   const response = await skill.invoke(event, context);
-  console.log(`RESPONSE++++${JSON.stringify(response)}`);
 
   return response;
 }
