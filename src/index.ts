@@ -5,29 +5,27 @@ const LaunchRequestHandler = {
     return getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speechText = 'Bob is dead!';
-
     return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard("I'm a card title", speechText)
+      .speak('Bob is alive!')
+      .reprompt('Bob is alive!')
+      .withSimpleCard("I'm a card title", 'Bob is alive!')
       .getResponse();
   }
 };
 
 const AskDaytimeIntentHandler = {
-canHandle(handlerInput) {
-  return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-    && getIntentName(handlerInput.requestEnvelope) === 'AskDaytimeIntent';
-},
-handle(handlerInput) {
-  const currentHour = (new Date()).getHours();
-  const speechText =  (currentHour > 6 && currentHour < 18) ? 'It is daytime!' : 'It is nighttime!';
+  canHandle(handlerInput) {
+    return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+      && getIntentName(handlerInput.requestEnvelope) === 'AskDaytimeIntent';
+  },
+  handle(handlerInput) {
+    const currentHour = (new Date()).getHours();
+    const speechText =  (currentHour > 6 && currentHour < 18) ? 'It is daytime!' : 'It is nighttime!';
 
-  return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('A title, wow', speechText)
-      .getResponse();
+    return handlerInput.responseBuilder
+        .speak(speechText)
+        .withSimpleCard('A title, wow', speechText)
+        .getResponse();
   }
 };
 
