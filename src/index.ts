@@ -5,7 +5,7 @@ const LaunchRequestHandler = {
     return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speechText = 'Welcome to Arexa! Ask me if it\'s daytime!';
+    const speechText = 'Welcome to Office Pet! Ask me if it\'s daytime!';
 
     return handlerInput.responseBuilder
       .speak(speechText)
