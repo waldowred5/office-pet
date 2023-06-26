@@ -1,6 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
+      "invocationName": "change me",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -15,8 +16,8 @@
           "samples": []
         },
         {
-          "slots": [],
           "name": "HelloWorldIntent",
+          "slots": [],
           "samples": [
             "hello",
             "how are you",
@@ -36,13 +37,27 @@
           "samples": []
         },
         {
-          "slots": [],
           "name": "AskDaytimeIntent",
+          "slots": [],
           "samples": []
+        },
+        {
+          "name": "CreatePetIntent",
+          "slots": [],
+          "samples": [
+            "adopt a new pet",
+            "adopt a pet",
+            "add a new pet",
+            "create a pet",
+            "create a new pet",
+            "adopt new pet",
+            "add new pet",
+            "adopt pet",
+            "create pet"
+          ]
         }
       ],
-      "types": [],
-      "invocationName": "change me"
+      "types": []
     }
   }
 }

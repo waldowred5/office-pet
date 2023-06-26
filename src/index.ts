@@ -1,4 +1,13 @@
-import { getRequestType, getIntentName, SkillBuilders } from 'ask-sdk-core';
+import { getRequestType, getIntentName, SkillBuilders, getUserId } from 'ask-sdk-core';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { v4 as uuid } from 'uuid';
+import {
+  DynamoDBDocumentClient,
+  PutCommand,
+} from "@aws-sdk/lib-dynamodb";
+const client = new DynamoDBClient({ region: 'us-east-1' });
+const dynamo = DynamoDBDocumentClient.from(client);
+const tableName = 'office-pet';
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -6,28 +15,39 @@ const LaunchRequestHandler = {
   },
   handle(handlerInput) {
     return handlerInput.responseBuilder
-      .speak('Bob is happy!')
-      .reprompt('Bob is happy!')
-      .withSimpleCard("I'm a card title", 'Bob is happy!')
+      .speak('Welcome to Office Pet')
+      .reprompt('Welcome to Office Pet')
       .getResponse();
   }
 };
 
-const AskDaytimeIntentHandler = {
+const CreatePetIntentHandler = {
   canHandle(handlerInput) {
     return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-      && getIntentName(handlerInput.requestEnvelope) === 'AskDaytimeIntent';
+      && getIntentName(handlerInput.requestEnvelope) === 'CreatePetIntent';
   },
-  handle(handlerInput) {
-    const currentHour = (new Date()).getHours();
-    const speechText =  (currentHour > 6 && currentHour < 18) ? 'It is daytime!' : 'It is nighttime!';
+  async handle(handlerInput) {
+    const userId = getUserId(handlerInput.requestEnvelope);
+    const petName = 'Bob';
+
+    await dynamo.send(
+      new PutCommand({
+        TableName: tableName,
+        Item: {
+          'office-pet-key': uuid(),
+          userId: userId,
+          name: petName,
+          adopted: new Date().toISOString(),
+        },
+      })
+    );
 
     return handlerInput.responseBuilder
-        .speak(speechText)
-        .withSimpleCard('A title, wow', speechText)
+        .speak(`Congratulations! You have successfully adopted your new pet. Their name is ${petName}. Say hi to ${petName}`)
+        .reprompt(`Say hi to ${petName}`)
         .getResponse();
   }
-};
+}
 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
@@ -79,7 +99,7 @@ const ErrorHandler = {
   },
   handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
-    const reprompt = 'I don\'t understand my man, what are you talking about?';
+    const reprompt = 'I\'m not quite sure, can you please repeat that?';
 
     return handlerInput.responseBuilder
       .speak(reprompt)
@@ -95,7 +115,7 @@ export async function handler(event, context) {
     skill = SkillBuilders.custom()
       .addRequestHandlers(
         LaunchRequestHandler,
-        AskDaytimeIntentHandler,
+        CreatePetIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
@@ -105,6 +125,8 @@ export async function handler(event, context) {
   }
 
   const response = await skill.invoke(event, context);
+
+  console.log(response);
 
   return response;
 }

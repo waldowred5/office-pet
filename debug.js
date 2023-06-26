@@ -2,7 +2,7 @@ const va = require("virtual-alexa");
 const prompts = require("prompts");
 const _defaultHandler = va.VirtualAlexa.Builder()
   .handler("./dist/index.js") // Lambda file
-  .interactionModelFile("./skill-package/interactionModels/custom/en-US.json") // Interaction file
+  .interactionModelFile("./skill-package/interactionModels/custom/en-AU.json") // Interaction file
   .locale("en-US")
   .create();
 
