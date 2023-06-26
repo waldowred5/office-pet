@@ -1,0 +1,43 @@
+Arguments: 
+  /Users/ben/.nvm/versions/node/v20.0.0/bin/node /Users/ben/.nvm/versions/node/v20.0.0/bin/yarn add ask-sdk-core ask-sdk-model @aws-sdk/client-dynamod
+
+PATH: 
+  /Users/ben/.nvm/versions/node/v20.0.0/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/ben/.cargo/bin:/Users/ben/Library/Android/sdk/emulator:/Users/ben/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.0.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@aws-sdk%2fclient-dynamod: Not found
+      at params.callback [as _callback] (/Users/ben/.nvm/versions/node/v20.0.0/lib/node_modules/yarn/lib/cli.js:66145:18)
+      at self.callback (/Users/ben/.nvm/versions/node/v20.0.0/lib/node_modules/yarn/lib/cli.js:140890:22)
+      at Request.emit (node:events:511:28)
+      at Request.<anonymous> (/Users/ben/.nvm/versions/node/v20.0.0/lib/node_modules/yarn/lib/cli.js:141862:10)
+      at Request.emit (node:events:511:28)
+      at IncomingMessage.<anonymous> (/Users/ben/.nvm/versions/node/v20.0.0/lib/node_modules/yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:625:28)
+      at IncomingMessage.emit (node:events:523:35)
+      at endReadableNT (node:internal/streams/readable:1367:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "name": "src",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "git@github.com:Lexicon-Digital/office-pet.git",
+    "author": "Ben Franzi <me@benfranzi.com>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,0 +1,3 @@
+{
+  "extends": ["@bengineer.dev/core"]
+}
