@@ -14,7 +14,9 @@
     "@aws-sdk/client-dynamodb": "^3.359.0",
     "@aws-sdk/lib-dynamodb": "^3.359.0",
     "ask-sdk-core": "^2.14.0",
+    "ask-sdk-dynamodb-persistence-adapter": "^2.14.0",
     "ask-sdk-model": "^1.76.0",
+    "aws-sdk": "^2.1404.0",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
