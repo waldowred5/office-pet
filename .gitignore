@@ -8,3 +8,4 @@ dist.zip
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.env.local

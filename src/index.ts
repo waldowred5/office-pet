@@ -9,8 +9,8 @@ import {
 
 const client = new DynamoDBClient({ region: 'us-east-1' });
 const dynamo = DynamoDBDocumentClient.from(client);
-const PET_TABLE = 'office-pet';
-const INTERACTION_TABLE = 'office-pet-interaction';
+const PET_TABLE = 'office-pet_pets';
+const INTERACTION_TABLE = 'office-pet_interactions';
 
 async function getPet(handlerInput) {
   const userId = getUserId(handlerInput.requestEnvelope);
