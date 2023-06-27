@@ -24,18 +24,42 @@
           "samples": []
         },
         {
-          "name": "CreatePetIntent",
+          "name": "AdoptPetIntent",
           "slots": [],
           "samples": [
             "adopt a new pet",
             "adopt a pet",
-            "add a new pet",
-            "create a pet",
-            "create a new pet",
             "adopt new pet",
-            "add new pet",
             "adopt pet",
-            "create pet"
+            "I'd like to adopt a pet"
+          ]
+        },
+        {
+          "name": "CleanPetIntent",
+          "slots": [],
+          "samples": [
+            "clean pet"
+          ]
+        },
+        {
+          "name": "FeedPetIntent",
+          "slots": [],
+          "samples": [
+            "feed pet"
+          ]
+        },
+        {
+          "name": "GreetPetIntent",
+          "slots": [],
+          "samples": [
+            "greet pet"
+          ]
+        },
+        {
+          "name": "PetStatusIntent",
+          "slots": [],
+          "samples": [
+            "pet status"
           ]
         }
       ],
