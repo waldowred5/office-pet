@@ -3,9 +3,24 @@ export enum InteractionType {
   CLEAN = 'CLEAN',
 }
 
+export enum Status {
+  POSITIVE = 'POSITIVE',
+  NEUTRAL = 'NEUTRAL',
+  NEGATIVE = 'NEGATIVE',
+  CRITICAL = 'CRITICAL'
+}
+
 export type Interaction = {
   count: number;
   lastInteraction: string;
+}
+
+export type PetAttributes = {
+  color: string;
+  origin: string;
+  shape: string;
+  size: string;
+  temperament: string;
 }
 
 export type Pet = {
@@ -13,6 +28,7 @@ export type Pet = {
   userId: string;
   name: string;
   adopted: string;
+  attributes: PetAttributes;
   [InteractionType.FEED]?: Interaction;
   [InteractionType.CLEAN]?: Interaction;
 }
