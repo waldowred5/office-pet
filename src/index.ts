@@ -10,6 +10,7 @@ import GreetPetIntent from "./handlers/GreetPetIntent";
 import HelpIntent from "./handlers/HelpIntent";
 import LaunchIntent from "./handlers/LaunchIntent";
 import PetStatusIntent from "./handlers/PetStatusIntent";
+import DescribePetIntent from "./handlers/DescribePetIntent";
 
 let skill;
 
@@ -24,6 +25,7 @@ export async function handler(event, context) {
         CancelAndStopIntent,
         CleanPetIntent,
         GreetPetIntent,
+        DescribePetIntent,
         PetStatusIntent,
         EndedIntent, // clean up function
       )

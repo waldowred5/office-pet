@@ -1,12 +1,12 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
 import templateString from "../utils/template-string";
-import {greet} from "../pet/greet";
-import general from "../assets/general.json";
+import {describe} from "../pet/describe";
+import general from '../assets/general.json';
 
-const GreetPetIntent = {
+const DescribePetIntent = {
   canHandle(handlerInput) {
     return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-      && getIntentName(handlerInput.requestEnvelope) === 'GreetPetIntent';
+      && getIntentName(handlerInput.requestEnvelope) === 'DescribePetIntent';
   },
   async handle(handlerInput) {
     if (!handlerInput.pet) {
@@ -15,7 +15,7 @@ const GreetPetIntent = {
         .getResponse();
     }
 
-    const phrase = greet(handlerInput.pet);
+    const phrase = describe(handlerInput.pet);
 
     return handlerInput.responseBuilder
       .speak(phrase)
@@ -24,4 +24,4 @@ const GreetPetIntent = {
   }
 }
 
-export default GreetPetIntent;
+export default DescribePetIntent;

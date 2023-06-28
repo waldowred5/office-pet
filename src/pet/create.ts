@@ -1,17 +1,26 @@
-import {Pet} from "../types";
+import {Pet, PetAttributes} from "../types";
 import {v4 as uuid} from "uuid";
-import getDynamo, {PET_TABLE} from "../utils/dynamo";
-import {PutCommand} from "@aws-sdk/lib-dynamodb";
+import petAttributes from '../assets/pet-attributes.json';
+import petNames from '../assets/pet-names.json';
+
+function generateAttributes(): PetAttributes {
+  const getRandom = (list) => list[Math.ceil(Math.random() * list.length - 1)]; // Note: skips first as it is the fallback value
+
+  return {
+    color: getRandom(petAttributes.color).short,
+    origin: getRandom(petAttributes.origin).short,
+    shape: getRandom(petAttributes.shape).short,
+    size: getRandom(petAttributes.size).short,
+    temperament: getRandom(petAttributes.temperament).short,
+  }
+}
 
 export default async function create(userId: string): Promise<Pet> {
-  const petName = 'Bob';
-
-  const pet: Pet = {
+  return {
     petId: uuid(),
     userId: userId,
-    name: petName,
+    name: petNames[Math.ceil(Math.random() * petNames.length)],
     adopted: new Date().toISOString(),
+    attributes: generateAttributes(),
   };
-
-  return pet;
 }

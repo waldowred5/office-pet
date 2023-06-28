@@ -56,6 +56,13 @@
           ]
         },
         {
+          "name": "DescribePetIntent",
+          "slots": [],
+          "samples": [
+            "describe pet"
+          ]
+        },
+        {
           "name": "PetStatusIntent",
           "slots": [],
           "samples": [
