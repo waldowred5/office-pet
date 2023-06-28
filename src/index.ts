@@ -34,7 +34,5 @@ export async function handler(event, context) {
       .create();
   }
 
-  const response = await skill.invoke(event, context);
-  console.log(response);
-  return response;
+  return await skill.invoke(event, context);
 }

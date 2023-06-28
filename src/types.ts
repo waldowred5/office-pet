@@ -16,4 +16,3 @@ export type Pet = {
   [InteractionType.FEED]?: Interaction;
   [InteractionType.CLEAN]?: Interaction;
 }
-

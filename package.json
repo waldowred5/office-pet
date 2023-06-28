@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "ncc build --source-map --watch src/index.ts",
     "debug": "node debug.js",
+    "debug:default-user": "ALEXA_USER_ID=amzn1.ask.account.aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee yarn debug",
     "build": "ncc build --minify src/index.ts && zip -jr dist.zip dist/. && rm -rf dist"
   },
   "dependencies": {

@@ -4,9 +4,7 @@ import { AWS } from "./config";
 
 
 
-export const PET_TABLE = 'office-pet';
-export const INTERACTION_TABLE = 'office-pet-interaction';
-
+export const PET_TABLE = 'office-pet_pets';
 let instance = null;
 
 export default function getDynamo(): DynamoDBDocumentClient {
