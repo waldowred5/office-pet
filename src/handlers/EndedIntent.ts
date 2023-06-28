@@ -1,11 +1,15 @@
 import {getRequestType} from "ask-sdk-core";
+import commit from "../pet/commit";
 
+/**
+ * abnormally ended intent
+ */
 const EndedIntent = {
   canHandle(handlerInput) {
     return getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
   },
-  handle(handlerInput) {
-    // Any clean-up logic goes here.
+  async handle(handlerInput) {
+    await commit(handlerInput.pet); // Save pet after session ends abnormally
     return handlerInput.responseBuilder.getResponse();
   }
 };

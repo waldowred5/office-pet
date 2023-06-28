@@ -1,5 +1,5 @@
 import {getIntentName, getRequestType, getUserId} from "ask-sdk-core";
-import createPet from "../pet/createPet";
+import create from "../pet/create";
 
 const AdoptPetIntent = {
   canHandle(handlerInput) {
@@ -15,7 +15,7 @@ const AdoptPetIntent = {
     }
 
     const userId = getUserId(handlerInput.requestEnvelope);
-    handlerInput.pet  = await createPet(userId);
+    handlerInput.pet  = await create(userId);
 
     return handlerInput.responseBuilder
       .speak(`Congratulations! You have successfully adopted your new pet. Their name is ${handlerInput.pet.name}. Say hi to ${handlerInput.pet.name}`)

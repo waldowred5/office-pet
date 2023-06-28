@@ -12,6 +12,8 @@ const { ALEXA_USER_ID, ALEXA_SESSION_ID } = process.env;
 if (ALEXA_USER_ID) _defaultHandler.context()._user._id = ALEXA_USER_ID;
 if (ALEXA_SESSION_ID) _defaultHandler.context()._session._id = ALEXA_SESSION_ID;
 
+console.log("current user:", _defaultHandler.context()._user._id);
+
 async function prompt() {
   const input = await prompts({
     type: 'text',

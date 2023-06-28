@@ -1,4 +1,5 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
+import commit from "../pet/commit";
 
 const CancelAndStopIntent = {
   canHandle(handlerInput) {
@@ -6,7 +7,9 @@ const CancelAndStopIntent = {
       && (getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
         || getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
+    await commit(handlerInput.pet); // Save pet after session ends abnormally
+
     const speechText = 'Catch ya later skater!';
 
     return handlerInput.responseBuilder
