@@ -1,4 +1,4 @@
-import {getIntentName, getRequestType} from "ask-sdk-core";
+import { getIntentName, getRequestType } from 'ask-sdk-core';
 
 const HelpIntent = {
   canHandle(handlerInput) {
@@ -6,13 +6,13 @@ const HelpIntent = {
       && getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'You can ask me if it\'s daytime, that is it!';
+    const { pet } = handlerInput;
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard('Wowza, I\'m a card title', speechText)
-      .getResponse();
+    const prompt = pet
+      ? `This is office pet! You can ask me how ${pet.name}, you can also ask me to feed ${pet.name} or even to clean ${pet.name}!`
+      : 'This is office pet! To get started ask me to adopt a pet.';
+
+    return handlerInput.responseBuilder.speak(prompt).getResponse();
   }
 };
 

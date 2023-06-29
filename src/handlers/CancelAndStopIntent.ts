@@ -8,13 +8,18 @@ const CancelAndStopIntent = {
         || getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
   },
   async handle(handlerInput) {
-    await commit(handlerInput.pet); // Save pet after session ends abnormally
+    if (!handlerInput.pet) {
+      return handlerInput.responseBuilder
+        .speak('See you next time!')
+        .getResponse();
+    }
 
-    const speechText = 'Catch ya later skater!';
+    await commit(handlerInput.pet);
+
+    const speechText = `See you next time, ${handlerInput.pet.name} says bye!`;
 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Catch ya later skater in the title!', speechText)
       .withShouldEndSession(true)
       .getResponse();
   }

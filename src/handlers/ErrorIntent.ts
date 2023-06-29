@@ -3,15 +3,15 @@ const ErrorIntent = {
     return true;
   },
   handle(handlerInput, error) {
-    console.log(`Error handled: ${error.message}`);
-    console.log(error);
-    const reprompt = 'Something went wrong, please try again';
+    console.log('Error:', error);
+    const { pet } = handlerInput;
+    const prompt = `Sorry I missed that, what would you like to do${pet ? ` with ${pet.name}` : ''}?`;
 
     return handlerInput.responseBuilder
-      .speak(reprompt)
-      .reprompt(reprompt)
+      .speak(prompt)
       .getResponse();
   }
 };
+
 
 export default ErrorIntent;

@@ -9,8 +9,10 @@ const EndedIntent = {
     return getRequestType(handlerInput.requestEnvelope) === 'SessionEndedRequest';
   },
   async handle(handlerInput) {
-    await commit(handlerInput.pet); // Save pet after session ends abnormally
-    return handlerInput.responseBuilder.getResponse();
+    if (handlerInput.pet) await commit(handlerInput.pet); // Save pet after session ends abnormally
+    return handlerInput.responseBuilder
+      .withShouldEndSession(true)
+      .getResponse();
   }
 };
 
