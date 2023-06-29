@@ -28,7 +28,7 @@ export default async function getReplyCompletion(
       {role: "user", content: prompt},
     ];
 
-  const completion = await openai.createChatCompletion({model: "gpt-4", messages: messages});
+  const completion = await openai.createChatCompletion({model: "gpt-3.5-turbo", messages: messages});
   const response = completion.data.choices[0].message.content;
   messages.push({ role: 'assistant', content: response});
 
