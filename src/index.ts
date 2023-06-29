@@ -11,6 +11,7 @@ import HelpIntent from "./handlers/HelpIntent";
 import LaunchIntent from "./handlers/LaunchIntent";
 import PetStatusIntent from "./handlers/PetStatusIntent";
 import DescribePetIntent from "./handlers/DescribePetIntent";
+import CatchAllIntent from "./handlers/CatchAllIntent";
 
 let skill;
 
@@ -22,12 +23,13 @@ export async function handler(event, context) {
         AdoptPetIntent,
         FeedPetIntent,
         HelpIntent,
-        CancelAndStopIntent,
         CleanPetIntent,
         GreetPetIntent,
         DescribePetIntent,
         PetStatusIntent,
-        EndedIntent, // clean up function
+        CatchAllIntent, // Called when no other intent is matched
+        CancelAndStopIntent, // called on user close
+        EndedIntent, // clean up function, called on unexpected ending
       )
       .addRequestInterceptors(PetRequestInterceptor)
       .addResponseInterceptors(PetResponseInterceptor)
