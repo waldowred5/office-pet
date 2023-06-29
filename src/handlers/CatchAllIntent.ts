@@ -18,12 +18,18 @@ const CatchAllIntent = {
         .getResponse();
     }
 
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    const history = sessionAttributes.history || [];
+
     const phrase = handlerInput.requestEnvelope.request.intent.slots.phrase.value;
 
-    const completion = await getReplyCompletion(pet, phrase);
+    const { response, history: updatedHistory } = await getReplyCompletion(pet, phrase, history);
+
+    sessionAttributes.history = updatedHistory;
+    handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
     return handlerInput.responseBuilder
-      .speak(completion)
+      .speak(response)
       .reprompt(templateString(general.promptForAction, {name: pet.name}))
       .getResponse();
   }
