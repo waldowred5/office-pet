@@ -43,15 +43,33 @@
         },
         {
           "name": "FeedPetIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "foodItem",
+              "type": "FOOD_ITEM"
+            }
+          ],
           "samples": [
+            "feed pet {foodItem}",
             "feed pet"
           ]
         },
         {
           "name": "GreetPetIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "name",
+              "type": "AMAZON.FirstName"
+            }
+          ],
           "samples": [
+            "hello there",
+            "how is my little one doing",
+            "well look who it is",
+            "how is it going {name}",
+            "how is {name} doing",
+            "how is {name} going",
+            "hi {name}",
             "greet pet"
           ]
         },
@@ -68,9 +86,32 @@
           "samples": [
             "pet status"
           ]
+        },
+        {
+          "name": "DescribePetIntent",
+          "slots": [],
+          "samples": [
+            "describe pet"
+          ]
         }
       ],
-      "types": []
+      "types": [
+        {
+          "name": "FOOD_ITEM",
+          "values": [
+            {
+              "name": {
+                "value": "cupcake"
+              }
+            },
+            {
+              "name": {
+                "value": "carrot"
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }
