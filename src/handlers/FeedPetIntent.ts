@@ -17,6 +17,7 @@ const FeedPetIntent = {
 
     return handlerInput.responseBuilder
       .speak(`I can't do that yet`)
+      .reprompt(`I can't do that yet`)
       .getResponse();
   }
 }

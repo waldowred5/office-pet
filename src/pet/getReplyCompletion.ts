@@ -2,7 +2,6 @@ import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from "openai";
 import {Pet} from "../types";
 import templateString from "../utils/template-string";
 import general from '../assets/general.json';
-import {interfaces} from "ask-sdk-model";
 
 export default async function getReplyCompletion(
   pet: Pet,
@@ -21,7 +20,7 @@ export default async function getReplyCompletion(
 
   const messages: ChatCompletionRequestMessage[] = !history.length ?
     [
-      {role: "system", content: templateString(general.fallbackPrompt, {name: pet.name, ...pet.attributes})},
+      {role: "system", content: templateString(general.gptInitialPrompt, {name: pet.name, ...pet.attributes})},
       {role: "user", content: prompt},
     ]
     : [
@@ -29,7 +28,7 @@ export default async function getReplyCompletion(
       {role: "user", content: prompt},
     ];
 
-  const completion = await openai.createChatCompletion({model: "gpt-3.5-turbo", messages: messages});
+  const completion = await openai.createChatCompletion({model: "gpt-4", messages: messages});
   const response = completion.data.choices[0].message.content;
   messages.push({ role: 'assistant', content: response});
 

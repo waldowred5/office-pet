@@ -9,6 +9,7 @@ const ErrorIntent = {
 
     return handlerInput.responseBuilder
       .speak(prompt)
+      .reprompt(prompt)
       .getResponse();
   }
 };

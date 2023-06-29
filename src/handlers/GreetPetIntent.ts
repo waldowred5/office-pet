@@ -12,6 +12,7 @@ const GreetPetIntent = {
     if (!handlerInput.pet) {
       return handlerInput.responseBuilder
         .speak(general.noPet)
+        .reprompt(general.noPet)
         .getResponse();
     }
 
