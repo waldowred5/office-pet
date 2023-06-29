@@ -93,6 +93,18 @@
           "samples": [
             "describe pet"
           ]
+        },
+        {
+          "name": "CatchAllIntent",
+          "slots": [
+            {
+              "name": "phrase",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "samples": [
+            "{phrase}"
+          ]
         }
       ],
       "types": [
