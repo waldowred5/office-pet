@@ -15,6 +15,16 @@ export type Interaction = {
   lastInteraction: string;
 }
 
+export type FeedInteraction = {
+  count: number;
+  lastInteraction: string | null;
+  allFeedInteractions: {
+    [key: string]: {
+      count: number;
+    }
+  }
+}
+
 export type PetAttributes = {
   color: string;
   origin: string;
@@ -29,6 +39,14 @@ export type Pet = {
   name: string;
   adopted: string;
   attributes: PetAttributes;
-  [InteractionType.FEED]?: Interaction;
-  [InteractionType.CLEAN]?: Interaction;
+  interactions: {
+    [InteractionType.FEED]: FeedInteraction;
+    [InteractionType.CLEAN]: Interaction;
+  }
+}
+
+export type PetStatus = {
+  hunger: Status;
+  cleanliness: Status;
+  overall: Status;
 }

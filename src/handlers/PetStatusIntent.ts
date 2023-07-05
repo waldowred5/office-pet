@@ -1,4 +1,5 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
+import {getPetStatus} from "../pet/getStatus";
 
 const PetStatusIntent = {
   canHandle(handlerInput) {
@@ -6,9 +7,20 @@ const PetStatusIntent = {
       && getIntentName(handlerInput.requestEnvelope) === 'PetStatusIntent';
   },
   async handle(handlerInput) {
+    const pet = handlerInput.pet;
+
+    if (!pet) {
+      return handlerInput.responseBuilder
+        .speak(`You don't have a pet, go adopt one`)
+        .reprompt(`You don't have a pet, go adopt one`)
+        .getResponse();
+    }
+
+    let petStatus = await getPetStatus(pet);
+
     return handlerInput.responseBuilder
-      .speak(`I can't do that yet`)
-      .reprompt(`I can't do that yet`)
+      .speak(`Overall status: ${petStatus.overall}. Cleanliness status: ${petStatus.cleanliness}. Hunger status: ${petStatus.hunger}`)
+      .reprompt(`Overall status: ${petStatus.overall}. Cleanliness status: ${petStatus.cleanliness}. Hunger status: ${petStatus.hunger}`)
       .getResponse();
   }
 }
