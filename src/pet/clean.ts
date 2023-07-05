@@ -1,6 +1,5 @@
-import {InteractionType, Pet} from "../types";
+import {Pet} from "../types";
 
-export async function clean(pet: Pet): Promise<Pet> {
-    pet.interactions[InteractionType.CLEAN].lastInteraction = new Date().toISOString();
-    return pet;
+export async function clean(pet: Pet): Promise<void> {
+  throw new Error('clean not implemented');
 }

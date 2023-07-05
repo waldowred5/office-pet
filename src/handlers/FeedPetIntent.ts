@@ -1,6 +1,4 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
-import {PetResponseInterceptor} from "../interceptors/PetInterceptor";
-import {feed} from "../pet/feed";
 
 const FeedPetIntent = {
   canHandle(handlerInput) {
@@ -17,12 +15,9 @@ const FeedPetIntent = {
         .getResponse();
     }
 
-    handlerInput.pet = await feed(pet);
-    await PetResponseInterceptor.process(handlerInput);
-
     return handlerInput.responseBuilder
-      .speak(`You have successfully fed your pet. ${handlerInput.pet.name} is not starving anymore!`)
-      .reprompt(`You have successfully fed your pet. ${handlerInput.pet.name} is not starving anymore!`)
+      .speak(`I can't do that yet`)
+      .reprompt(`I can't do that yet`)
       .getResponse();
   }
 }

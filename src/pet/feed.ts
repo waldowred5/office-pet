@@ -1,6 +1,5 @@
-import {InteractionType, Pet} from "../types";
+import {Pet} from "../types";
 
-export async function feed(pet: Pet): Promise<Pet> {
-  pet.interactions[InteractionType.FEED].lastInteraction = new Date().toISOString();
-  return pet;
+export async function feed(pet: Pet): Promise<void> {
+  throw new Error('feed not implemented');
 }
