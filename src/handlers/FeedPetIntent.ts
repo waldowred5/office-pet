@@ -1,4 +1,5 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
+import {feed} from "../pet/feed";
 
 const FeedPetIntent = {
   canHandle(handlerInput) {
@@ -6,7 +7,7 @@ const FeedPetIntent = {
       && getIntentName(handlerInput.requestEnvelope) === 'FeedPetIntent';
   },
   async handle(handlerInput) {
-    const pet = handlerInput.pet;
+    const { pet } = handlerInput;
 
     if (!pet) {
       return handlerInput.responseBuilder
@@ -15,9 +16,11 @@ const FeedPetIntent = {
         .getResponse();
     }
 
+    handlerInput.pet = await feed(pet);
+
     return handlerInput.responseBuilder
-      .speak(`I can't do that yet`)
-      .reprompt(`I can't do that yet`)
+      .speak(`You have successfully fed your pet. ${handlerInput.pet.name} is not starving anymore!`)
+      .reprompt(`You have successfully fed your pet. ${handlerInput.pet.name} is not starving anymore!`)
       .getResponse();
   }
 }

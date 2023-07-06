@@ -1,4 +1,4 @@
-import {Pet, PetAttributes} from "../types";
+import {InteractionType, Pet, PetAttributes} from "../types";
 import {v4 as uuid} from "uuid";
 import petAttributes from '../assets/pet-attributes.json';
 import petNames from '../assets/pet-names.json';
@@ -22,5 +22,16 @@ export default async function create(userId: string): Promise<Pet> {
     name: petNames[Math.ceil(Math.random() * petNames.length)],
     adopted: new Date().toISOString(),
     attributes: generateAttributes(),
+    interactions: {
+      [InteractionType.FEED]: {
+        count: 0,
+        lastInteraction: null,
+        allFeedInteractions: {}
+      },
+      [InteractionType.CLEAN]: {
+        count: 0,
+        lastInteraction: null
+      }
+    }
   };
 }
