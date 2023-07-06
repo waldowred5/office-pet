@@ -1,26 +1,33 @@
-import {InteractionType, Pet, PetStatus, Status} from "../types";
+import {InteractionType, Pet, Status} from "../types";
 import {baseFrequencies, weightFactors} from "../utils/config";
+import templateString from "../utils/template-string";
+import petGreetings from "../assets/pet-greetings.json";
+import petStatus from "../assets/pet-status.json";
 
-function calculateHungerStatus(lastInteraction: Date): number {
-    return calculateStatus(lastInteraction, baseFrequencies[InteractionType.FEED]);
+function calculateHunger(lastInteraction: Date): number {
+    return calculate(lastInteraction, baseFrequencies[InteractionType.FEED]);
 }
 
-function calculateCleanlinessStatus(lastInteraction: Date): number {
-    return calculateStatus(lastInteraction, baseFrequencies[InteractionType.CLEAN]);
+function calculateCleanliness(lastInteraction: Date): number {
+    return calculate(lastInteraction, baseFrequencies[InteractionType.CLEAN]);
 }
 
-function calculateStatus(lastInteraction: Date, baseFrequency: number): number {
+function calculate(lastInteraction: Date, baseFrequency: number): number {
     const currentTime = new Date();
     const timePassed = (currentTime.getTime() - lastInteraction.getTime()) / 1000;
 
-    return normalizeStatus((baseFrequency - timePassed) / baseFrequency);
+    return normalizeValue((baseFrequency - timePassed) / baseFrequency);
 }
 
-function calculateOverallStatus(hungerStatus: number, cleanlinessStatus: number): number {
-    const normalizedHunger = normalizeStatus(hungerStatus);
-    const normalizedCleanliness = normalizeStatus(cleanlinessStatus);
+function calculateOverallMood(hungerValue: number, cleanlinessValue: number): number {
+    const normalizedHunger = normalizeValue(hungerValue);
+    const normalizedCleanliness = normalizeValue(cleanlinessValue);
 
     return (normalizedHunger * weightFactors[InteractionType.FEED]) + (normalizedCleanliness * weightFactors[InteractionType.CLEAN]);
+}
+
+function normalizeValue(status: number): number {
+    return Math.min(1, Math.max(0, status));
 }
 
 function mapStatus(statusValue: number): Status {
@@ -38,23 +45,22 @@ function mapStatus(statusValue: number): Status {
     }
 }
 
-function normalizeStatus(status: number): number {
-    return Math.min(1, Math.max(0, status));
-}
-
-
-export async function getPetStatus(pet: Pet): Promise<PetStatus> {
+export async function getPetStatus(pet: Pet): Promise<String> {
 
     const lastFeedInteraction = pet.interactions[InteractionType.FEED];
     const lastCleanInteraction = pet.interactions[InteractionType.CLEAN];
 
-    const hungerStatus = calculateHungerStatus(new Date(lastFeedInteraction?.lastInteraction || pet.adopted));
-    const cleanlinessStatus = calculateCleanlinessStatus(new Date(lastCleanInteraction?.lastInteraction || pet.adopted));
-    const overallStatus = calculateOverallStatus(hungerStatus, cleanlinessStatus);
+    const hungerValue = calculateHunger(new Date(lastFeedInteraction?.lastInteraction || pet.adopted));
+    const cleanlinessValue = calculateCleanliness(new Date(lastCleanInteraction?.lastInteraction || pet.adopted));
+    const overallValue = calculateOverallMood(hungerValue, cleanlinessValue);
 
-    return {
-        hunger: mapStatus(hungerStatus),
-        cleanliness: mapStatus(cleanlinessStatus),
-        overall: mapStatus(overallStatus)
-    }
+    const hungerStatus = mapStatus(hungerValue);
+    const cleanlinessStatus = mapStatus(cleanlinessValue);
+    const overallStatus = mapStatus(overallValue);
+
+    const hungerStatusPhrase = templateString(petStatus.hungerStatus[hungerStatus][Math.ceil(Math.random() * petStatus.hungerStatus[hungerStatus].length - 1)], { name: pet.name });
+    const cleanlinessStatusPhrase = templateString(petStatus.cleanlinessStatus[cleanlinessStatus][Math.ceil(Math.random() * petStatus.cleanlinessStatus[cleanlinessStatus].length - 1)], { name: pet.name });
+    const overallStatusPhrase = templateString(petGreetings[overallStatus][Math.ceil(Math.random() * petGreetings[overallStatus].length - 1)], { name: pet.name });
+
+    return `${overallStatusPhrase} ${hungerStatusPhrase} ${cleanlinessStatusPhrase}`;
 }
