@@ -7,7 +7,7 @@ const PetStatusIntent = {
       && getIntentName(handlerInput.requestEnvelope) === 'PetStatusIntent';
   },
   async handle(handlerInput) {
-    const pet = handlerInput.pet;
+    const { pet } = handlerInput;
 
     if (!pet) {
       return handlerInput.responseBuilder
@@ -16,7 +16,7 @@ const PetStatusIntent = {
         .getResponse();
     }
 
-    let petStatus = await getPetStatus(pet);
+    const petStatus = await getPetStatus(pet);
 
     return handlerInput.responseBuilder
       .speak(`Overall status: ${petStatus.overall}. Cleanliness status: ${petStatus.cleanliness}. Hunger status: ${petStatus.hunger}`)

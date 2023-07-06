@@ -1,5 +1,4 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
-import {PetResponseInterceptor} from "../interceptors/PetInterceptor";
 import {clean} from "../pet/clean";
 
 const CleanPetIntent = {
@@ -8,7 +7,7 @@ const CleanPetIntent = {
       && getIntentName(handlerInput.requestEnvelope) === 'CleanPetIntent';
   },
   async handle(handlerInput) {
-    const pet = handlerInput.pet;
+    const { pet } = handlerInput;
 
     if (!pet) {
       return handlerInput.responseBuilder
@@ -18,7 +17,6 @@ const CleanPetIntent = {
     }
 
     handlerInput.pet = await clean(handlerInput.pet);
-    await PetResponseInterceptor.process(handlerInput);
 
     return handlerInput.responseBuilder
       .speak(`You have successfully cleaned your pet. ${handlerInput.pet.name} is not stinky anymore!`)

@@ -2,26 +2,18 @@ import {InteractionType, Pet, PetStatus, Status} from "../types";
 import {baseFrequencies, weightFactors} from "../utils/config";
 
 function calculateHungerStatus(lastInteraction: Date): number {
-    console.log(`Last feed: ${lastInteraction}`);
     return calculateStatus(lastInteraction, baseFrequencies[InteractionType.FEED]);
 }
 
 function calculateCleanlinessStatus(lastInteraction: Date): number {
-    console.log(`Last clean: ${lastInteraction}`);
     return calculateStatus(lastInteraction, baseFrequencies[InteractionType.CLEAN]);
 }
 
 function calculateStatus(lastInteraction: Date, baseFrequency: number): number {
-    if(!lastInteraction) {
-        return 1;
-    }
-    else {
-        let currentTime = new Date();
-        let timePassed = (currentTime.getTime() - lastInteraction.getTime()) / 1000;
-        console.log(`Time passed: ${timePassed}`);
+    const currentTime = new Date();
+    const timePassed = (currentTime.getTime() - lastInteraction.getTime()) / 1000;
 
-        return (baseFrequency - timePassed) / baseFrequency;
-    }
+    return normalizeStatus((baseFrequency - timePassed) / baseFrequency);
 }
 
 function calculateOverallStatus(hungerStatus: number, cleanlinessStatus: number): number {
