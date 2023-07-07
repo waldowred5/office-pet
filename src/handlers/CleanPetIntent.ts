@@ -1,28 +1,33 @@
-import {getIntentName, getRequestType} from "ask-sdk-core";
-import {clean} from "../pet/clean";
+import { getIntentName, getRequestType } from "ask-sdk-core";
+import { clean } from "../pet/clean";
+import templateString from "../utils/template-string";
+import general from "../assets/general.json";
 
 const CleanPetIntent = {
   canHandle(handlerInput) {
-    return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-      && getIntentName(handlerInput.requestEnvelope) === 'CleanPetIntent';
+    return (
+      getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      getIntentName(handlerInput.requestEnvelope) === "CleanPetIntent"
+    );
   },
   async handle(handlerInput) {
-    const { pet } = handlerInput;
-
-    if (!pet) {
+    if (!handlerInput.pet) {
       return handlerInput.responseBuilder
-          .speak(`You don't have a pet, go adopt one`)
-          .reprompt(`You don't have a pet, go adopt one`)
-          .getResponse();
+        .speak(general.noPet)
+        .reprompt(general.noPet)
+        .getResponse();
     }
 
-    handlerInput.pet = await clean(handlerInput.pet);
+    const [pet, phrase] = await clean(handlerInput.pet);
+    handlerInput.pet = pet;
 
     return handlerInput.responseBuilder
-      .speak(`You have successfully cleaned your pet. ${handlerInput.pet.name} is not stinky anymore!`)
-      .reprompt(`You have successfully cleaned your pet. ${handlerInput.pet.name} is not stinky anymore!`)
+      .speak(phrase)
+      .reprompt(
+        templateString(general.promptForAction, { name: handlerInput.pet.name })
+      )
       .getResponse();
-  }
-}
+  },
+};
 
 export default CleanPetIntent;

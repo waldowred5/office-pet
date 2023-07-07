@@ -2,10 +2,8 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { AWS } from "./config";
 
-
-
-export const PET_TABLE = 'office-pet_pets';
-let instance = null;
+export const PET_TABLE = "office-pet_pets";
+let instance: DynamoDBDocumentClient | null = null;
 
 export default function getDynamo(): DynamoDBDocumentClient {
   if (!instance) {

@@ -4,7 +4,7 @@ const prompts = require('prompts');
 const _defaultHandler = va.VirtualAlexa.Builder()
   .handler('./dist/index.js') // Lambda file
   .interactionModelFile('./skill-package/interactionModels/custom/en-AU.json') // Interaction file
-  .locale('en-US')
+  .locale('en-AU')
   .create();
 
 const { ALEXA_USER_ID, ALEXA_SESSION_ID } = process.env;

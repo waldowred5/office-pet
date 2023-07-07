@@ -36,9 +36,24 @@
         },
         {
           "name": "CleanPetIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "Clean",
+              "type": "CLEAN_ADJECTIVE"
+            },
+            {
+              "name": "Name",
+              "type": "AMAZON.FirstName"
+            }
+          ],
           "samples": [
-            "clean pet"
+            "clean {Name}",
+            "wash {Name}",
+            "{Clean} pet",
+            "{Clean} my pet",
+            "I'd like to {Clean} my pet {Name}",
+            "please {Clean} {Name}",
+            "please {Clean} my pet {Name}"
           ]
         },
         {
@@ -49,10 +64,7 @@
               "type": "FOOD_ITEM"
             }
           ],
-          "samples": [
-            "feed pet {foodItem}",
-            "feed pet"
-          ]
+          "samples": ["feed pet {foodItem}", "feed pet"]
         },
         {
           "name": "GreetPetIntent",
@@ -76,23 +88,17 @@
         {
           "name": "DescribePetIntent",
           "slots": [],
-          "samples": [
-            "describe pet"
-          ]
+          "samples": ["describe pet"]
         },
         {
           "name": "PetStatusIntent",
           "slots": [],
-          "samples": [
-            "pet status"
-          ]
+          "samples": ["pet status"]
         },
         {
           "name": "DescribePetIntent",
           "slots": [],
-          "samples": [
-            "describe pet"
-          ]
+          "samples": ["describe pet"]
         },
         {
           "name": "CatchAllIntent",
@@ -102,9 +108,7 @@
               "type": "AMAZON.Person"
             }
           ],
-          "samples": [
-            "{phrase}"
-          ]
+          "samples": ["{phrase}"]
         }
       ],
       "types": [
@@ -119,6 +123,32 @@
             {
               "name": {
                 "value": "carrot"
+              }
+            }
+          ]
+        },
+        {
+          "name": "CLEAN_ADJECTIVE",
+          "values": [
+            {
+              "name": {
+                "value": "scrub"
+              }
+            },
+            {
+              "name": {
+                "value": "unsoil"
+              }
+            },
+            {
+              "name": {
+                "value": "wash"
+              }
+            },
+            {
+              "name": {
+                "value": "clean",
+                "synonyms": ["cleanse"]
               }
             }
           ]
