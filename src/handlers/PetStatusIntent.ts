@@ -1,5 +1,7 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
 import {getPetStatus} from "../pet/getStatus";
+import general from "../assets/general.json";
+import templateString from "../utils/template-string";
 
 const PetStatusIntent = {
   canHandle(handlerInput) {
@@ -11,16 +13,16 @@ const PetStatusIntent = {
 
     if (!pet) {
       return handlerInput.responseBuilder
-        .speak(`You don't have a pet, go adopt one`)
-        .reprompt(`You don't have a pet, go adopt one`)
+        .speak(general.noPet)
+        .reprompt(general.noPet)
         .getResponse();
     }
 
-    const petStatus = await getPetStatus(pet);
+    const phrase = await getPetStatus(pet);
 
     return handlerInput.responseBuilder
-      .speak(`Overall status: ${petStatus.overall}. Cleanliness status: ${petStatus.cleanliness}. Hunger status: ${petStatus.hunger}`)
-      .reprompt(`Overall status: ${petStatus.overall}. Cleanliness status: ${petStatus.cleanliness}. Hunger status: ${petStatus.hunger}`)
+      .speak(phrase)
+      .reprompt(templateString(general.promptForAction, {name: handlerInput.pet.name }))
       .getResponse();
   }
 }
