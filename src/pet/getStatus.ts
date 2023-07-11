@@ -1,7 +1,6 @@
 import {InteractionType, Pet, Status} from "../types";
 import {baseFrequencies, weightFactors} from "../utils/config";
 import templateString from "../utils/template-string";
-import petGreetings from "../assets/pet-greetings.json";
 import petStatus from "../assets/pet-status.json";
 
 function calculateHunger(lastInteraction: Date): number {
@@ -60,7 +59,7 @@ export async function getPetStatus(pet: Pet): Promise<String> {
 
     const hungerStatusPhrase = templateString(petStatus.hungerStatus[hungerStatus][Math.ceil(Math.random() * petStatus.hungerStatus[hungerStatus].length - 1)], { name: pet.name });
     const cleanlinessStatusPhrase = templateString(petStatus.cleanlinessStatus[cleanlinessStatus][Math.ceil(Math.random() * petStatus.cleanlinessStatus[cleanlinessStatus].length - 1)], { name: pet.name });
-    const overallStatusPhrase = templateString(petGreetings[overallStatus][Math.ceil(Math.random() * petGreetings[overallStatus].length - 1)], { name: pet.name });
+    const overallStatusPhrase = templateString(petStatus.overallStatus[overallStatus][Math.ceil(Math.random() * petStatus.overallStatus[overallStatus].length - 1)], { name: pet.name });
 
     return `${overallStatusPhrase} ${hungerStatusPhrase} ${cleanlinessStatusPhrase}`;
 }

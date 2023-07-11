@@ -67,33 +67,38 @@
           "samples": ["feed pet {foodItem}", "feed pet"]
         },
         {
-          "name": "GreetPetIntent",
-          "slots": [
-            {
-              "name": "name",
-              "type": "AMAZON.FirstName"
-            }
-          ],
-          "samples": [
-            "hello there",
-            "how is my little one doing",
-            "well look who it is",
-            "how is it going {name}",
-            "how is {name} doing",
-            "how is {name} going",
-            "hi {name}",
-            "greet pet"
-          ]
-        },
-        {
           "name": "DescribePetIntent",
           "slots": [],
           "samples": ["describe pet"]
         },
         {
           "name": "PetStatusIntent",
-          "slots": [],
-          "samples": ["pet status"]
+          "slots": [
+            {
+              "name": "Name",
+              "type": "AMAZON.FirstName"
+            }
+          ],
+          "samples": [
+            "how is {Name} doing",
+            "how my pet is doing",
+            "how is {Name} feeling",
+            "how my pet is feeling",
+            "how is {Name}",
+            "how is my pet",
+            "what's the status of {Name}",
+            "what's the status of my pet",
+            "I'd like to know what the status of {Name} is",
+            "I'd like to know what the status of my pet is",
+            "I'd like to know how {Name} is doing",
+            "I'd like to know how my pet is doing",
+            "I'd like to know how {Name} is feeling",
+            "I'd like to know how my pet is feeling",
+            "I'd like to know how {Name} is",
+            "I'd like to know how my pet is",
+            "pet status",
+            "{Name} status"
+          ]
         },
         {
           "name": "DescribePetIntent",
