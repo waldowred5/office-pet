@@ -67,11 +67,6 @@
           "samples": ["feed pet {foodItem}", "feed pet"]
         },
         {
-          "name": "DescribePetIntent",
-          "slots": [],
-          "samples": ["describe pet"]
-        },
-        {
           "name": "PetStatusIntent",
           "slots": [
             {
