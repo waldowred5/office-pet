@@ -6,7 +6,6 @@ import AdoptPetIntent from "./handlers/AdoptPetIntent";
 import EndedIntent from "./handlers/EndedIntent";
 import ErrorIntent from "./handlers/ErrorIntent";
 import FeedPetIntent from "./handlers/FeedPetIntent";
-import GreetPetIntent from "./handlers/GreetPetIntent";
 import HelpIntent from "./handlers/HelpIntent";
 import LaunchIntent from "./handlers/LaunchIntent";
 import PetStatusIntent from "./handlers/PetStatusIntent";
@@ -24,7 +23,6 @@ export async function handler(event, context) {
         FeedPetIntent,
         HelpIntent,
         CleanPetIntent,
-        GreetPetIntent,
         DescribePetIntent,
         PetStatusIntent,
         CatchAllIntent, // Called when no other intent is matched
