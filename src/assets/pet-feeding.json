@@ -1,0 +1,4 @@
+{
+  "fed": "You have successfully fed {{name}}",
+  "wait": "{{name}} isn't hungry right now. Try feeding again later"
+}

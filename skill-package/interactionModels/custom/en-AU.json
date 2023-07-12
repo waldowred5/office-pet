@@ -60,11 +60,22 @@
           "name": "FeedPetIntent",
           "slots": [
             {
-              "name": "foodItem",
-              "type": "FOOD_ITEM"
+              "name": "Name",
+              "type": "AMAZON.FirstName"
             }
           ],
-          "samples": ["feed pet {foodItem}", "feed pet"]
+          "samples": [
+            "feed pet",
+            "feed my pet",
+            "give pet a treat",
+            "give my pet a treat",
+            "feed {Name}",
+            "give {Name} a treat",
+            "can you please feed {Name}",
+            "can you please give {Name} a treat",
+            "I'd like to feed {Name}",
+            "I'd like to give {Name} a treat"
+          ]
         },
         {
           "name": "PetStatusIntent",
@@ -112,21 +123,6 @@
         }
       ],
       "types": [
-        {
-          "name": "FOOD_ITEM",
-          "values": [
-            {
-              "name": {
-                "value": "cupcake"
-              }
-            },
-            {
-              "name": {
-                "value": "carrot"
-              }
-            }
-          ]
-        },
         {
           "name": "CLEAN_ADJECTIVE",
           "values": [
