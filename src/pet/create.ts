@@ -26,7 +26,6 @@ export default async function create(userId: string): Promise<Pet> {
       [InteractionType.FEED]: {
         count: 0,
         lastInteraction: null,
-        allFeedInteractions: {}
       },
       [InteractionType.CLEAN]: {
         count: 0,
