@@ -16,9 +16,9 @@ const FeedPetIntent = {
         .getResponse();
     }
 
-    const petNameSlot = handlerInput.requestEnvelope.request.intent.slots.Name.value;
+    const petNameSlot = handlerInput.requestEnvelope.request.intent.slots.Name.value || "";
 
-    if (petNameSlot != handlerInput.pet.name) {
+    if (petNameSlot && petNameSlot != handlerInput.pet.name) {
       return handlerInput.responseBuilder
         .speak(
           templateString(general.wrongPet, { name: petNameSlot })
