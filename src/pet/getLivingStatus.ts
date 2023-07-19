@@ -10,11 +10,17 @@ function getPseudoRandomNumber(isBelow: number, { seed, dayOfDeath }: { seed: st
   return Math.floor(raw) % isBelow;
 }
 
+type LivingStatus = {
+  isDead: boolean;
+  causeOfDeath?: InteractionType;
+  message?: string;
+};
+
 /**
  * Returns isAlive status and optional cause of death
  * cause of death is the greatest gap from the expireAfter time
  */
-export default function getLivingStatus(pet: Pet): { isDead: boolean, causeOfDeath?: InteractionType, message?: string } {
+export default function getLivingStatus(pet: Pet): LivingStatus {
   if (!pet) return { isDead: false };
 
   const currentTime = Date.now();
