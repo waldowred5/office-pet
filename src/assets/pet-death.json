@@ -1,0 +1,16 @@
+{
+  "FEED": [
+    "Due to neglect in feeding, {{name}} suffered from severe malnourishment, which ultimately led to their untimely passing.",
+    "The lack of proper feeding and sustenance caused {{name}} to endure starvation, resulting in their unfortunate demise.",
+    "{{name}}'s vital organs failed due to prolonged periods without proper nourishment, leading to their passing.",
+    "Insufficient food intake compromised {{name}}'s immune system, rendering them vulnerable to illnesses that proved fatal.",
+    "Neglecting to feed {{name}} resulted in their gradual physical decline, eventually leading to their passing."
+  ],
+  "CLEAN": [
+    "Due to neglected cleaning, dangerous fungi grew in {{name}}'s habitat, posing a respiratory threat and contributing to their passing.",
+    "{{name}}'s habitat attracted disease-carrying pests as cleaning was neglected, resulting in severe health complications and, sadly, their untimely demise.",
+    "Accumulated toxins in {{name}}'s surroundings proved fatal, as they posed an overwhelming risk to their well-being and caused their passing.",
+    "Insufficient cleaning allowed deadly bacterial infections to ravage {{name}}'s health, ultimately leading to their unfortunate demise.",
+    "Neglected grooming of {{name}} resulted in an uncontrollable parasitic infestation, which tragically caused their health to deteriorate and their life to come to an end."
+  ]
+}

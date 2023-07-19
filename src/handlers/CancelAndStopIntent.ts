@@ -1,5 +1,6 @@
 import { getIntentName, getRequestType } from "ask-sdk-core";
 import commit from "../pet/commit";
+import getLivingStatus from "../pet/getLivingStatus";
 
 const CancelAndStopIntent = {
   canHandle(handlerInput) {
@@ -18,7 +19,9 @@ const CancelAndStopIntent = {
 
     await commit(handlerInput.pet);
 
-    const speechText = `${handlerInput.pet.name} says bye! Until next time, catch you later skater!`;
+    const { isDead } = getLivingStatus(handlerInput.pet);
+
+    const speechText = `${handlerInput.pet.name} ${isDead ? 'would say bye if they could' : 'says bye'}! Until next time, catch you later skater!`;
 
     return handlerInput.responseBuilder
       .speak(speechText)

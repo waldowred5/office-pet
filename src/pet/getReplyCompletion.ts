@@ -1,6 +1,6 @@
 import {ChatCompletionRequestMessage, Configuration, OpenAIApi} from "openai";
 import {Pet} from "../types";
-import templateString from "../utils/template-string";
+import templateString from "../utils/templateString";
 import general from '../assets/general.json';
 
 export default async function getReplyCompletion(
