@@ -1,6 +1,6 @@
 import { Pet, InteractionType, Interaction } from "../types";
 import { baseFrequencies, interactionBlockedFor } from "../utils/config";
-import templateString from "../utils/template-string";
+import templateString from "../utils/templateString";
 import petCleaned from "../assets/pet-cleaning.json";
 
 export async function clean(pet: Pet): Promise<[Pet, string]> {

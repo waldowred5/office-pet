@@ -1,7 +1,8 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
-import templateString from "../utils/template-string";
+import templateString from "../utils/templateString";
 import {describe} from "../pet/describe";
 import general from '../assets/general.json';
+import getLivingStatus from "../pet/getLivingStatus";
 
 const DescribePetIntent = {
   canHandle(handlerInput) {
@@ -13,6 +14,15 @@ const DescribePetIntent = {
       return handlerInput.responseBuilder
         .speak(general.noPet)
         .reprompt(general.noPet)
+        .getResponse();
+    }
+
+    const livingStatus = getLivingStatus(handlerInput.pet);
+
+    if (livingStatus.isDead) {
+      return handlerInput.responseBuilder
+        .speak(livingStatus.message)
+        .reprompt(general.newPetNeeded)
         .getResponse();
     }
 

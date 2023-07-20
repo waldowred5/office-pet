@@ -1,7 +1,8 @@
 import {getIntentName, getRequestType} from "ask-sdk-core";
 import getReplyCompletion from "../pet/getReplyCompletion";
-import templateString from "../utils/template-string";
+import templateString from "../utils/templateString";
 import general from '../assets/general.json';
+import getLivingStatus from "../pet/getLivingStatus";
 
 const CatchAllIntent = {
   canHandle(handlerInput) {
@@ -10,8 +11,9 @@ const CatchAllIntent = {
   },
   async handle(handlerInput) {
     const {pet} = handlerInput;
+    const { isDead } = getLivingStatus(handlerInput.pet);
 
-    if (!pet) {
+    if (!pet || isDead) {
       return handlerInput.responseBuilder
         .speak('Sorry I missed that, what would you like to do?')
         .reprompt('Sorry I missed that, what would you like to do?')

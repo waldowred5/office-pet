@@ -1,6 +1,6 @@
 import {InteractionType, Pet, Status} from "../types";
 import {baseFrequencies, weightFactors} from "../utils/config";
-import templateString from "../utils/template-string";
+import templateString from "../utils/templateString";
 import petStatus from "../assets/pet-status.json";
 
 function calculateHunger(lastInteraction: Date): number {

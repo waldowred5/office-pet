@@ -1,3 +1,5 @@
+import getLivingStatus from "../pet/getLivingStatus";
+
 const ErrorIntent = {
   canHandle() {
     return true;
@@ -5,7 +7,9 @@ const ErrorIntent = {
   handle(handlerInput, error) {
     console.log('Error:', error);
     const { pet } = handlerInput;
-    const prompt = `Sorry I missed that, what would you like to do${pet ? ` with ${pet.name}` : ''}?`;
+    const {isDead} = getLivingStatus(handlerInput.pet);
+
+    const prompt = `Sorry I missed that, what would you like to do${pet && !isDead ? ` with ${pet.name}` : ''}?`;
 
     return handlerInput.responseBuilder
       .speak(prompt)

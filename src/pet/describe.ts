@@ -1,6 +1,6 @@
 import {Pet, Status} from "../types";
 import petAttributes from '../assets/pet-attributes.json';
-import templateString from "../utils/template-string";
+import templateString from "../utils/templateString";
 
 export function describe(pet: Pet): string {
   const attributes = Object.entries(pet.attributes);

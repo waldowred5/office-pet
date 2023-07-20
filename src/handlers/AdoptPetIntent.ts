@@ -1,5 +1,6 @@
 import {getIntentName, getRequestType, getUserId} from "ask-sdk-core";
 import create from "../pet/create";
+import getLivingStatus from "../pet/getLivingStatus";
 
 const AdoptPetIntent = {
   canHandle(handlerInput) {
@@ -7,7 +8,9 @@ const AdoptPetIntent = {
       && getIntentName(handlerInput.requestEnvelope) === 'AdoptPetIntent';
   },
   async handle(handlerInput) {
-    if (!!handlerInput.pet) {
+    const livingStatus = getLivingStatus(handlerInput.pet);
+
+    if (!!handlerInput.pet && !livingStatus.isDead) {
       return handlerInput.responseBuilder
         .speak(`You've already got a pet, what's wrong with ${handlerInput.pet.name}`)
         .reprompt(`You've already got a pet, what's wrong with ${handlerInput.pet.name}`)

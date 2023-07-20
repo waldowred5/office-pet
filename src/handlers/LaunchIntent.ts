@@ -14,9 +14,10 @@ const LaunchIntent = {
         .getResponse();
     }
 
+    // Note: if the pet has passed away, the user will still be asked to check up on the pet
     return handlerInput.responseBuilder
       .speak(`Welcome to Office Pet, ask me how ${pet.name} is doing`)
-      .reprompt(`Welcome to Office Pet, ask me how ${pet.name} is doing`)
+      .reprompt(`Ask me how ${pet.name} is doing`)
       .getResponse();
   }
 };
