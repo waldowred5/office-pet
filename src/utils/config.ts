@@ -21,6 +21,6 @@ export const interactionBlockedFor = {
 };
 
 export const expiresAfter = {
-  [InteractionType.FEED]: 30 * 24 * 60 * 60, // 30 days
-  [InteractionType.CLEAN]: 60 * 24 * 60 * 60, // 60 days
+  [InteractionType.FEED]: 30 * 24 * 60 * 60 * 1000, // 30 days
+  [InteractionType.CLEAN]: 60 * 24 * 60 * 60 * 1000, // 60 days
 }
