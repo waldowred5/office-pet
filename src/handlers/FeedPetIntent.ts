@@ -28,7 +28,7 @@ const FeedPetIntent = {
 
     const petNameSlot = handlerInput.requestEnvelope.request.intent.slots.Name.value || "";
 
-    if (petNameSlot && petNameSlot != handlerInput.pet.name) {
+    if (petNameSlot && petNameSlot.toUpperCase() !== handlerInput.pet.name.toUpperCase()) {
       return handlerInput.responseBuilder
         .speak(
           templateString(general.wrongPet, { name: petNameSlot })
